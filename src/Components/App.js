@@ -41,14 +41,14 @@ class App extends Component {
   onCloseModal = () => this.setState({ isModalOpen: false });
 
   render = () => {
-    const { isLoading, isModalOpen, query, images, modalImage } = this.state;
+    const { isLoading, isModalOpen, images, modalImage } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.onSearchSubmit} />
-        <ImageGallery images={images} onImageClick={this.onImageClick} />
+        {images.length > 0 && <ImageGallery images={images} onImageClick={this.onImageClick} />}
         {isModalOpen && <Modal image={modalImage} onCloseModal={this.onCloseModal} />}
         {isLoading && <Loader />}
-        {query && <Button onClick={this.onLoadMore} />}
+        {images.length > 0 && !isLoading && <Button onClick={this.onLoadMore} />}
       </>
     );
   };

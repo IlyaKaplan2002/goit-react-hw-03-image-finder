@@ -9,7 +9,13 @@ const getImages = (query, page) => {
       `${BASE_URL}?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12
 `,
     )
-    .then(res => res.data.hits);
+    .then(res =>
+      res.data.hits.map(({ id, webformatURL, largeImageURL }) => ({
+        id,
+        webformatURL,
+        largeImageURL,
+      })),
+    );
 };
 
 export default { getImages };
